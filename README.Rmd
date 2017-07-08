@@ -3,6 +3,8 @@ title: "PoloniexR"
 output: rmarkdown::github_document
 ---
 
+[![Travis-CI Build Status](https://travis-ci.org/VermeirJellen/PoloniexR.svg?branch=master)](https://travis-ci.org/VermeirJellen/PoloniexR)
+
 This package aims to provide a user-friendly R wrapper on top of the Poloniex (Cryptocurrency Trading) REST API. Results are converted into R datastructures and are returned to the users in a more intuitive manner.
 
 Installation:
@@ -410,7 +412,6 @@ Or preferably, donate some of my favorite coins :)
 
  - GAME: GMxcsDAaHCBkLnN42Fs9Dy1fpDiLNxSKX1
  - WAVES: 3PQ8KFdw2nWxQATsXQj8NJvSa1VhBcKePaf
- - SIA: 11f91dd7fb894489916f36fa2ceda2fdcd4f1894b29364a7e82e9e5d44a8209dbd04a8120d47
  
 ## Licensing
 

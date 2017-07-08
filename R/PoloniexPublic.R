@@ -68,6 +68,14 @@ setGeneric(name="GetPoloniexPublicURL",
              standardGeneric("GetPoloniexPublicURL")
            })
 
+#' Returns REST service URL for the Poloniex Public API
+#'
+#' @param theObject The object on which the function should be called
+#' @return base.url - a length-one character vector.
+#'  Represents the Poloniex public API service base url.
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' GetPoloniexPublicURL(poloniex.public)
 #' @export
 setMethod(f="GetPoloniexPublicURL",
           signature="PoloniexPublicAPI", definition=function(theObject){
@@ -82,7 +90,8 @@ setMethod(f="GetPoloniexPublicURL",
 #' @return theObject - a copy of the object with the modified base.url slot
 #' @examples
 #' poloniex.public <- PoloniexPublicAPI(base.url = "https://not_working/public?")
-#' poloniex.public <- SetPoloniexPublicURL(poloniex.public, base.url = "https://poloniex.com/public?")
+#' poloniex.public <- SetPoloniexPublicURL(poloniex.public, 
+#'                                         base.url = "https://poloniex.com/public?")
 #' GetPoloniexPublicURL(poloniex.public)
 #' @export
 setGeneric(name="SetPoloniexPublicURL",
@@ -90,6 +99,16 @@ setGeneric(name="SetPoloniexPublicURL",
              standardGeneric("SetPoloniexPublicURL")
            })
 
+#' Setter for REST service URL for the Poloniex public API
+#'
+#' @param theObject The public client API object on which the function should be called
+#' @param base.url length-one character vector. Represents the REST service URL.
+#' @return theObject - a copy of the object with the modified base.url slot
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI(base.url = "https://not_working/public?")
+#' poloniex.public <- SetPoloniexPublicURL(poloniex.public, 
+#'                                         base.url = "https://poloniex.com/public?")
+#' GetPoloniexPublicURL(poloniex.public)
 #' @export
 setMethod(f="SetPoloniexPublicURL",
           signature="PoloniexPublicAPI", definition=function(theObject, base.url){
@@ -117,6 +136,14 @@ setGeneric(name="GetPoloniexPublicCommands",
              standardGeneric("GetPoloniexPublicCommands")
            })
 
+#' Returns REST service commands for the Poloniex Public API
+#'
+#' @param theObject The public client API object on which the function should be called
+#' @return commands - a list with Key/value string pairs
+#'  Represents the command strings for the respective public API functions.
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' GetPoloniexPublicCommands(poloniex.public)
 #' @export
 setMethod(f="GetPoloniexPublicCommands",
           signature="PoloniexPublicAPI", definition=function(theObject){
@@ -143,6 +170,20 @@ setGeneric(name="SetPoloniexPublicCommands",
              standardGeneric("SetPoloniexPublicCommands")
            })
 
+#' Setter for REST service commands for the Poloniex public API.
+#'
+#' @param theObject The public client API object on which the function should be called
+#' @param commands -  a list with Key/value string pairs
+#'  Represents the command strings for the respective public API functions.
+#' @return theObject - a copy of the object with the modified command slot
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' GetPoloniexPublicCommands(poloniex.public)
+#' commands.new <- list(returnTicker = "returnTicker.new",
+#'                     return24hVolume = "return24hVolume.new")
+#' poloniex.public <- SetPoloniexPublicCommands(poloniex.public,
+#'                                              commands = commands.new)
+#' GetPoloniexPublicCommands(poloniex.public)
 #' @export
 setMethod(f="SetPoloniexPublicCommands",
           signature="PoloniexPublicAPI", definition=function(theObject, commands){
@@ -216,6 +257,16 @@ setGeneric(name="ReturnTicker",
              standardGeneric("ReturnTicker")
            })
 
+#' Returns the ticker for all markets
+#'
+#' @param theObject The public client API object on which the function should be called
+#' @return A dataframe containing ticker information
+#'  Rows    - Cryptocurrency Pairs
+#'  Columns - id, last, lowestAsk, highestBid, percentChange
+#'   baseVolume, quoteVolume, isFrozen, high24hr, low24hr
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' GetPoloniexPublicURL(poloniex.public)
 #' @export
 setMethod(f="ReturnTicker",
           signature="PoloniexPublicAPI", definition=function(theObject){
@@ -268,6 +319,24 @@ setGeneric(name="Return24hVolume",
              standardGeneric("Return24hVolume")
            })
 
+#' Returns 24-hour trading volumes for all available markets.
+#' Additionally, total trading volumes for the 5 primary currencies
+#' are also retrieved.
+#'
+#' @param theObject The public client API object on which the function should be called
+#' @return A list containing the 24 hour volume information.
+#'  volume.pairs: A dataframe
+#'   Rows    - Cryptocurrency Trading Pairs.
+#'             Every pair represents a market.
+#'   Columns - Transacted trading volumes for a particular market.
+#'             Volumes are expressed in both base currency units and quoted
+#'             currency units.
+#'  volume.totals: Total trading volumes of five primary currencies.
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' volume.info <- Return24hVolume(poloniex.public)
+#' head(volume.info$volume.pairs)
+#' volume.info$volume.totals
 #' @export
 setMethod(f="Return24hVolume",
           signature="PoloniexPublicAPI", definition=function(theObject){
@@ -357,6 +426,54 @@ setGeneric(name="ReturnOrderBook",
              standardGeneric("ReturnOrderBook")
            })
 
+#' Returns the order book for a given market,
+#' as well as a sequence number for use with the Push API
+#' and an indicator specifying whether the market is frozen.
+#'
+#' @param theObject The public client API object on which the function should be called.
+#' @param pair length one-character vector - The currencypair
+#'  for which orderbook information should be fetched.
+#'  You may set pair to "all" to fetch the order books of all markets.
+#' @param depth numeric - depth of the orderbook.
+#' @return A list containing orderbook information.
+#'
+#'  if pair == "all": a list containing orderbook
+#'   information for all available markets.
+#'   Each list entry contains information for one
+#'   specific market.
+#'  if !pair == "all": a list containing orderbook
+#'   information for the requested markets.
+#'
+#'  Each market list contains following fields:
+#'   - ask: Orderbook sell side, Dataframe containing
+#'          ask prices and corresponding amounts.
+#'   - bid: Orderbook buy side. Dataframe containing
+#'          bid prices and corresponding amounts.
+#'   - frozen: indicator specifying wheather market
+#'             is frozen or not.
+#'   - seq: Sequence number for Push API.
+#'
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#'
+#' pair <- "BTC_NXT"
+#' depth <- 100
+#' order.book <- ReturnOrderBook(poloniex.public,
+#'                               pair  = pair,
+#'                               depth = 10)
+#' order.book$bid
+#' order.book$ask
+#' order.book$frozen
+#' order.book$seq
+#'
+#' pair <- "all"
+#' depth <- 10
+#' order.book <- ReturnOrderBook(poloniex.public,
+#'                               pair  = pair,
+#'                               depth = 10)
+#'
+#' names(order.book)
+#' order.book$BTC_ETH$ask
 #' @export
 setMethod(f="ReturnOrderBook",
           signature="PoloniexPublicAPI",
@@ -452,6 +569,40 @@ setGeneric(name="ReturnTradeHistory",
              standardGeneric("ReturnTradeHistory")
            })
 
+#' Returns the past 200 trades for a given market, or up to
+#' 50,000 trades inside a specified input date range interval.
+#'
+#' @param theObject The public client API object on which the function should be called.
+#' @param pair length-one character vector - The currencypair
+#' for which trade history information should be fetched.
+#' @param from POSIXct (or NULL) - starting timestamp
+#'  for optional date range interval.
+#'    if from != NULL: from must be < 'to' &
+#'    from must be >= (to - 1 year)
+#' @param to POSIXct (or NULL) - ending timestamp for optional
+#'  date range interval.
+#' @return an xts object containing historical trade information
+#'
+#'  Rows    - Information for one specific trade.
+#'  Columns - globalTradeID, tradeID, type, rate, amount, total
+#'
+#'    if from == NULL:
+#'      Receive information for last 200 trades before 'to'
+#'    if to == NULL:
+#'      Ending timestamp for daterange will be set to Sys.time()
+#'
+#' @examples
+#' Sys.setenv(tz = "UTC")
+#' poloniex.public <- PoloniexPublicAPI()
+#' pair   <- "BTC_NXT"
+#' from   <- as.POSIXct("2017-07-04 00:00:00 UTC")
+#' to     <- as.POSIXct("2017-07-05 00:00:00 UTC")
+#'
+#' trades.data <- ReturnTradeHistory(theObject = poloniex.public,
+#'                                   pair      = pair,
+#'                                   from      = from,
+#'                                   to        = to)
+#'
 #' @export
 setMethod(f="ReturnTradeHistory",
           signature="PoloniexPublicAPI",
@@ -567,6 +718,37 @@ setGeneric(name="ReturnChartData",
              standardGeneric("ReturnChartData")
            })
 
+#' Fetch OHLC and volume timeseries data for a specific market.
+#' The caller must specify a date range interval
+#' and datafrequency for the requested timeseries.
+#'
+#' @param theObject The object on which the function should be called.
+#' @param pair a length-one character vector - The currencypair
+#' for which timeseries information should be fetched.
+#' @param from POSIXct - Starting timestamp for
+#'  daterange interval.
+#' @param to POSIXct - Ending timestamp for daterange interval.
+#' @param period length-one character vector OR length-one
+#'  numeric vector - datafrequency for requested timeseries.
+#'   if is(period, "numeric"): 300 / 900 / 1800 / 7200 / 14400 / 86400
+#'   if is(period, "character"): "5M", "15M", "30M", "2H", "4H", "D"
+#' @return an xts timeseries object.
+#'  rows    - ohcl and volume information for one timestamp.
+#'  columns - high, low, open, close, volume, quotevolume,
+#'   weightedaverage.
+#' @examples
+#' Sys.setenv(tz = "UTC")
+#' poloniex.public <- PoloniexPublicAPI()
+#' pair    <- "BTC_NXT"
+#' from    <- as.POSIXct("2010-01-01 00:00:00 UTC")
+#' to      <- as.POSIXct("2012-04-09 00:00:00 UTC")
+#' period  <- "4H"
+#'
+#' chart.data <- ReturnChartData(theObject = poloniex.public,
+#'                               pair      = pair,
+#'                               from      = from,
+#'                               to        = to,
+#'                               period    = period)
 #' @export
 setMethod(f="ReturnChartData",
           signature="PoloniexPublicAPI",
@@ -666,6 +848,15 @@ setGeneric(name="ReturnCurrencies",
              standardGeneric("ReturnCurrencies")
            })
 
+#' Returns information about currencies
+#'
+#' @param theObject The object on which the function should be called
+#' @return A dataframe with currency information
+#'  - rows: Information about a single currency
+#'  - columns: id, txfee, minConf, disabled, delisted, frozen
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' currencies <- ReturnCurrencies(poloniex.public)
 #' @export
 setMethod(f="ReturnCurrencies",
           signature="PoloniexPublicAPI",
@@ -705,13 +896,28 @@ setMethod(f="ReturnCurrencies",
 #' @examples
 #' poloniex.public <- PoloniexPublicAPI()
 #' currency        <- "BTC"
-#' loan.orders     <- ReturnLoanOrders(poloniex.public,
+#' loan.orders     <- ReturnLoanOrders(poloniex.public)
 #' @export
 setGeneric(name="ReturnLoanOrders",
            def=function(theObject, currency = "BTC"){
              standardGeneric("ReturnLoanOrders")
            })
-                                
+          
+#' Returns a list of loan offers and demands for a given currency.
+#'
+#' @param theObject The object on which the function should be called
+#' @param currency - a length-one character vector
+#'  Represents the currency for which loan information should be
+#'  fetched.
+#' @return A list containing two items. Each item is a dataframe
+#'  containing the actual loan offers or demands information.
+#'   eg list$offers / list$demands
+#'    - rows: offers / demand "order book" entries.
+#'    - columns: rate, amount, min.days, max.days
+#' @examples
+#' poloniex.public <- PoloniexPublicAPI()
+#' currency        <- "BTC"
+#' loan.orders     <- ReturnLoanOrders(poloniex.public)                      
 #' @export
 setMethod(f="ReturnLoanOrders",
           signature="PoloniexPublicAPI",

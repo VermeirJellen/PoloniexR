@@ -9,10 +9,13 @@
 #'  - PoloniexTradingAPI: Allows the user to call Poloniex trading API functions.
 #'
 #' Examples:
-#' github.com/VermeirJellen/PoloniexR
-#' EssentialQuant.com/blog/PoloniexR (todo)
+#'  https://github.com/VermeirJellen/PoloniexR
+#'  http://EssentialQuant.com/blog/PoloniexR
 #'
 #' @docType package
 #' @name PoloniexR
-#' @importFrom methods setClass setGeneric setMethod setRefClass
+#' @importFrom methods is new validObject
+#' @import jsonlite
+#' @import RApiDatetime
+#' @import zoo
 NULL

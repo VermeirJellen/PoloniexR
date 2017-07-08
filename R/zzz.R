@@ -4,13 +4,16 @@
     "Poloniex API wrapper - Provided by EssentialQuant.com"
   )
   packageStartupMessage(
-    "Author: Jellen Vermeir (jellenvermeir@essentialquant.com)"
+    "  Author      - Jellen Vermeir (jellenvermeir@essentialquant.com)"
   )
   packageStartupMessage(
-    "Tutorial (todo): EssentialQuant.com/blog/PoloniexR"
+    "  Github      - https://github.com/VermeirJellen/PoloniexR"
   )
   packageStartupMessage(
-    "Github: https://github.com/VermeirJellen/PoloniexR"
+    "  Examples    - http://EssentialQuant.com/blog/PoloniexR"
+  )
+  packageStartupMessage(
+    "BTC Donations - 1QHtZLZ15Cmj4FPr5h5exDjYciBDhh7mzA"
   )
 }
 

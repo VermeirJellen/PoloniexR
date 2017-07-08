@@ -16,6 +16,6 @@ The package provides the user with two separate classes:
  - PoloniexTradingAPI: Allows the user to call Poloniex trading API functions.
 
 Examples:
-github.com/VermeirJellen/PoloniexR
-EssentialQuant.com/blog/PoloniexR (todo)
+ https://github.com/VermeirJellen/PoloniexR
+ http://EssentialQuant.com/blog/PoloniexR
 }
