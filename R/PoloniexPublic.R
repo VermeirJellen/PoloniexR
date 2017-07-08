@@ -90,7 +90,7 @@ setMethod(f="GetPoloniexPublicURL",
 #' @return theObject - a copy of the object with the modified base.url slot
 #' @examples
 #' poloniex.public <- PoloniexPublicAPI(base.url = "https://not_working/public?")
-#' poloniex.public <- SetPoloniexPublicURL(poloniex.public, 
+#' poloniex.public <- SetPoloniexPublicURL(poloniex.public,
 #'                                         base.url = "https://poloniex.com/public?")
 #' GetPoloniexPublicURL(poloniex.public)
 #' @export
@@ -106,7 +106,7 @@ setGeneric(name="SetPoloniexPublicURL",
 #' @return theObject - a copy of the object with the modified base.url slot
 #' @examples
 #' poloniex.public <- PoloniexPublicAPI(base.url = "https://not_working/public?")
-#' poloniex.public <- SetPoloniexPublicURL(poloniex.public, 
+#' poloniex.public <- SetPoloniexPublicURL(poloniex.public,
 #'                                         base.url = "https://poloniex.com/public?")
 #' GetPoloniexPublicURL(poloniex.public)
 #' @export
@@ -457,20 +457,20 @@ setGeneric(name="ReturnOrderBook",
 #' poloniex.public <- PoloniexPublicAPI()
 #'
 #' pair <- "BTC_NXT"
-#' depth <- 100
+#' depth <- 2
 #' order.book <- ReturnOrderBook(poloniex.public,
 #'                               pair  = pair,
-#'                               depth = 10)
+#'                               depth = depth)
 #' order.book$bid
 #' order.book$ask
 #' order.book$frozen
 #' order.book$seq
 #'
 #' pair <- "all"
-#' depth <- 10
+#' depth <- 2
 #' order.book <- ReturnOrderBook(poloniex.public,
 #'                               pair  = pair,
-#'                               depth = 10)
+#'                               depth = depth)
 #'
 #' names(order.book)
 #' order.book$BTC_ETH$ask
@@ -552,8 +552,8 @@ setMethod(f="ReturnOrderBook",
 #' Sys.setenv(tz = "UTC")
 #' poloniex.public <- PoloniexPublicAPI()
 #' pair   <- "BTC_NXT"
-#' from   <- as.POSIXct("2017-01-01 00:00:00 UTC")
-#' to     <- as.POSIXct("2017-12-30 00:00:00 UTC")
+#' from   <- as.POSIXct("2017-02-01 00:00:00 UTC")
+#' to     <- as.POSIXct("2017-02-02 00:00:00 UTC")
 #'
 #' trades.data <- ReturnTradeHistory(theObject = poloniex.public,
 #'                                   pair      = pair,
@@ -699,7 +699,7 @@ setMethod(f="ReturnTradeHistory",
 #' Sys.setenv(tz = "UTC")
 #' poloniex.public <- PoloniexPublicAPI()
 #' pair    <- "BTC_NXT"
-#' from    <- as.POSIXct("2010-01-01 00:00:00 UTC")
+#' from    <- as.POSIXct("2012-04-01 00:00:00 UTC")
 #' to      <- as.POSIXct("2012-04-09 00:00:00 UTC")
 #' period  <- "4H"
 #'
@@ -902,7 +902,7 @@ setGeneric(name="ReturnLoanOrders",
            def=function(theObject, currency = "BTC"){
              standardGeneric("ReturnLoanOrders")
            })
-          
+
 #' Returns a list of loan offers and demands for a given currency.
 #'
 #' @param theObject The object on which the function should be called
@@ -917,7 +917,7 @@ setGeneric(name="ReturnLoanOrders",
 #' @examples
 #' poloniex.public <- PoloniexPublicAPI()
 #' currency        <- "BTC"
-#' loan.orders     <- ReturnLoanOrders(poloniex.public)                      
+#' loan.orders     <- ReturnLoanOrders(poloniex.public)
 #' @export
 setMethod(f="ReturnLoanOrders",
           signature="PoloniexPublicAPI",

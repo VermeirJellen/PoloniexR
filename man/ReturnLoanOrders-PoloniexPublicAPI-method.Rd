@@ -27,5 +27,5 @@ Returns a list of loan offers and demands for a given currency.
 \examples{
 poloniex.public <- PoloniexPublicAPI()
 currency        <- "BTC"
-loan.orders     <- ReturnLoanOrders(poloniex.public)                      
+loan.orders     <- ReturnLoanOrders(poloniex.public)
 }

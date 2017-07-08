@@ -19,7 +19,7 @@ Setter for REST service URL for the Poloniex public API
 }
 \examples{
 poloniex.public <- PoloniexPublicAPI(base.url = "https://not_working/public?")
-poloniex.public <- SetPoloniexPublicURL(poloniex.public, 
+poloniex.public <- SetPoloniexPublicURL(poloniex.public,
                                         base.url = "https://poloniex.com/public?")
 GetPoloniexPublicURL(poloniex.public)
 }

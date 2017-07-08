@@ -40,8 +40,8 @@ Returns the past 200 trades for a given market, or up to
 Sys.setenv(tz = "UTC")
 poloniex.public <- PoloniexPublicAPI()
 pair   <- "BTC_NXT"
-from   <- as.POSIXct("2017-01-01 00:00:00 UTC")
-to     <- as.POSIXct("2017-12-30 00:00:00 UTC")
+from   <- as.POSIXct("2017-02-01 00:00:00 UTC")
+to     <- as.POSIXct("2017-02-02 00:00:00 UTC")
 
 trades.data <- ReturnTradeHistory(theObject = poloniex.public,
                                   pair      = pair,

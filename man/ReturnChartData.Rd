@@ -41,7 +41,7 @@ and datafrequency for the requested timeseries.
 Sys.setenv(tz = "UTC")
 poloniex.public <- PoloniexPublicAPI()
 pair    <- "BTC_NXT"
-from    <- as.POSIXct("2010-01-01 00:00:00 UTC")
+from    <- as.POSIXct("2012-04-01 00:00:00 UTC")
 to      <- as.POSIXct("2012-04-09 00:00:00 UTC")
 period  <- "4H"
 

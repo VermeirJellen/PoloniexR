@@ -47,20 +47,20 @@ and an indicator specifying whether the market is frozen.
 poloniex.public <- PoloniexPublicAPI()
 
 pair <- "BTC_NXT"
-depth <- 100
+depth <- 2
 order.book <- ReturnOrderBook(poloniex.public,
                               pair  = pair,
-                              depth = 10)
+                              depth = depth)
 order.book$bid
 order.book$ask
 order.book$frozen
 order.book$seq
 
 pair <- "all"
-depth <- 10
+depth <- 2
 order.book <- ReturnOrderBook(poloniex.public,
                               pair  = pair,
-                              depth = 10)
+                              depth = depth)
 
 names(order.book)
 order.book$BTC_ETH$ask
