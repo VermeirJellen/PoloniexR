@@ -1,13 +1,12 @@
 Package: PoloniexR
-Title: R wrapper for the Poloniex Public and Trading API
+Title: R interface to the Poloniex Cryptocurrency Trading API
 Version: 0.0.1
 Authors@R: person("Jellen", "Vermeir", email = "jellenvermeir@essentialquant.com", role = c("aut", "cre"))
-Description: This package provides a user-friendly R wrapper on top of the
-	Poloniex (Cryptocurrency Trading) REST API. The JSON results of the API calls are translated into R
-	Datastructures and are subsequently returned to the user in an intuitive manner.
-	The package provides the user with two separate classes:
-	 - PoloniexPublicAPI: Allows the user to call Poloniex Public API functions.
-	 - PoloniexTradingAPI: Allows the user to call Poloniex trading API functions.
+Description: This package provides a user-friendly R wrapper on top of the Poloniex (Cryptocurrency Trading) REST API. 
+  Results are converted into R datastructures and are returned to the users in an intuitive manner.
+	The package provides the users with two separate S4 classes:
+	 - PoloniexPublicAPI: Consists of wrapper methods on top of the Poloniex Public REST API.
+	 - PoloniexTradingAPI: Consists of wrapper methods on top of the Poloniex Trading REST API.
 Depends: R (>= 3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8

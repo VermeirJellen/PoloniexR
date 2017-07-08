@@ -5,22 +5,34 @@ output: rmarkdown::github_document
 
 [![Travis-CI Build Status](https://travis-ci.org/VermeirJellen/PoloniexR.svg?branch=master)](https://travis-ci.org/VermeirJellen/PoloniexR)
 
-This package aims to provide a user-friendly R wrapper on top of the Poloniex (Cryptocurrency Trading) REST API. Results are converted into R datastructures and are returned to the users in a more intuitive manner.
+This package provides a user-friendly R interface to the Poloniex (Cryptocurrency Trading) REST API.
 
-Installation:
+### Installation
+
+The package has been submitted to CRAN and will most likely be released in the near future (after approval). After the release date, the package can be installed in the usual manner:
 
 ```{r eval=FALSE}
-# install.packages("devtools"")
+install.packages("PoloniexR")
+```
+
+Before the release date, the package can be installed from github by using the ```devtools``` utility:
+
+```{r eval=FALSE}
+# install.packages("devtools") # if devtools currently not installed
 devtools::install_github("VermeirJellen/PoloniexR")
 ```
 
+Following the installation, the library can be loaded: ```library(PoloniexR)```.
+
+
 ## PoloniexPublicAPI / PoloniexTradingAPI
 
-A ```PoloniexPublicAPI``` object can be created as follows:
+The package exposes 2 S4 classes to the users:
 
-``` poloniex.public <- PoloniexPublicAPI()```
+* ```PoloniexPublicAPI```: Consists of wrapper methods on top of the Poloniex Public REST API.
+* ```PoloniexTradingAPI```: Consists of wrapper methods on top of the Poloniex Trading REST API.
 
-Methods Provided:
+Methods provided by the ```PoloniexPublicAPI```:
 
  - ```ReturnTicker```
  - ```Return24hVolume```
@@ -30,19 +42,15 @@ Methods Provided:
  - ```ReturnCurrencies```
  - ```ReturnLoanOrders```
  
-A ```PoloniexTradingAPI``` object can be created as follows:
-
-``` poloniex.trading <- PoloniexTradingAPI(key, secret) ```
-
-Methods Provided:
+Methods provided by the ```PoloniexTradingAPI```:
 
  - **ProcessTradingRequest()**: Allows the users to call any of the trading API methods that are provided by Poloniex.
  - ```ReturnBalances```
  - ```ReturnCompleteBalances```
  
-Todo: Higher level methods can potentially be wrapped on top of the ```ProcessTradingRequest``` method (as was done for the ```ReturnBalances``` and ```ReturnCompleteBalances``` functions).
+Use```?<function.name>``` to read full I/O specs and function documentation. cfr ```?ReturnTicker```.
 
-**!! EXAMPLES BELOW !!**
+**Examples are provided in the sections below**
 
 ### PUBLIC API - EXAMPLES
 
@@ -227,7 +235,7 @@ head(balances)
 
 #### ProcessTradingRequest
 
-This function allows the users to call any of the trading functions that are accessible through the Poloniex Trading API. The ```ProcessTradingRequest``` method takes a command string as input argument in combination with a list of additional input arguments that correspond to the particular command in question. Largely untested, but should work just fine.. (todo: test!).
+This function allows the users to call any of the trading functions that are accessible through the Poloniex Trading API. The ```ProcessTradingRequest``` method takes a command string as input argument in combination with a list of additional input arguments that correspond to the particular command in question.
 
 Some examples:
 
@@ -399,9 +407,7 @@ GetPoloniexPublicCommands(poloniex.public)
 
 ## Donations
 
-If you find this software useful and/or you would like to see additional extensions or a future release to CRAN, feel free to donate some crypto:
-
-Crypto Addresses:
+If you find this software useful and/or you would like to see additional extensions, feel free to donate some crypto:
 
  - BTC: 1QHtZLZ15Cmj4FPr5h5exDjYciBDhh7mzA
  - LTC: LhKf6MQ7LY1k8YMaAq9z3APz8kVyFX3L2M

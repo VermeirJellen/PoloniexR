@@ -21,8 +21,8 @@ rhub 4 runs: (initial runs)
      All declared Imports should be used.
 
 I assume these are build time dependencies since I always
-used "::" notation?
+used "::" notation.
 I suppressed the note with namespace imports of the packages.
 
-After suppression (First Submission):
+After suppression (submission):
 ── 0 errors | 0 warnings | 0 notes

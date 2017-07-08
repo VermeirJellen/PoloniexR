@@ -3,23 +3,34 @@ PoloniexR
 
 [![Travis-CI Build Status](https://travis-ci.org/VermeirJellen/PoloniexR.svg?branch=master)](https://travis-ci.org/VermeirJellen/PoloniexR)
 
-This package aims to provide a user-friendly R wrapper on top of the Poloniex (Cryptocurrency Trading) REST API. Results are converted into R datastructures and are returned to the users in a more intuitive manner.
+This package provides a user-friendly R interface to the Poloniex (Cryptocurrency Trading) REST API.
 
-Installation:
+### Installation
+
+The package has been submitted to CRAN and will most likely be released in the near future (after approval). After the release, the package can be installed in the usual manner:
 
 ``` r
-# install.packages("devtools"")
+install.packages("PoloniexR")
+```
+
+Before the release date, the package can be installed from github by using the `devtools` utility:
+
+``` r
+# install.packages("devtools") # if devtools currently not installed
 devtools::install_github("VermeirJellen/PoloniexR")
 ```
+
+After installation, the library can be loaded: `library(PoloniexR)`.
 
 PoloniexPublicAPI / PoloniexTradingAPI
 --------------------------------------
 
-A `PoloniexPublicAPI` object can be created as follows:
+The package exposes 2 S4 classes to the users:
 
-`poloniex.public <- PoloniexPublicAPI()`
+-   `PoloniexPublicAPI`: Consists of wrapper methods on top of the Poloniex Public REST API.
+-   `PoloniexTradingAPI`: Consists of wrapper methods on top of the Poloniex Trading REST API.
 
-Methods Provided:
+Methods provided by the `PoloniexPublicAPI`:
 
 -   `ReturnTicker`
 -   `Return24hVolume`
@@ -29,19 +40,15 @@ Methods Provided:
 -   `ReturnCurrencies`
 -   `ReturnLoanOrders`
 
-A `PoloniexTradingAPI` object can be created as follows:
-
-`poloniex.trading <- PoloniexTradingAPI(key, secret)`
-
-Methods Provided:
+Methods provided by the `PoloniexTradingAPI`:
 
 -   **ProcessTradingRequest()**: Allows the users to call any of the trading API methods that are provided by Poloniex.
 -   `ReturnBalances`
 -   `ReturnCompleteBalances`
 
-Todo: Higher level methods can potentially be wrapped on top of the `ProcessTradingRequest` method (as was done for the `ReturnBalances` and `ReturnCompleteBalances` functions).
+Use`?<function.name>` to read full I/O specs and function documentation. cfr `?ReturnTicker`.
 
-**!! EXAMPLES BELOW !!**
+**Examples are provided in the sections below**
 
 ### PUBLIC API - EXAMPLES
 
@@ -57,19 +64,19 @@ head(ticker.info)
 ```
 
     ##          id       last  lowestAsk highestBid percentChange    baseVolume
-    ## BTC_BCN   7 0.00000063 0.00000063 0.00000062   -0.08695652  277.37903586
-    ## BTC_BELA  8 0.00008232 0.00008279 0.00008232   -0.00843170  180.74523509
-    ## BTC_BLK  10 0.00013070 0.00013070 0.00013020   -0.03221029  288.08522392
-    ## BTC_BTCD 12 0.02220520 0.02220774 0.02220520   -0.03962728   29.51489308
-    ## BTC_BTM  13 0.00026391 0.00026489 0.00026392   -0.05944616   20.51282144
-    ## BTC_BTS  14 0.00007164 0.00007165 0.00007164   -0.04759372 3438.28410768
+    ## BTC_BCN   7 0.00000061 0.00000062 0.00000061   -0.10294117  234.57978772
+    ## BTC_BELA  8 0.00008216 0.00008276 0.00008227   -0.01059730  182.27880919
+    ## BTC_BLK  10 0.00012380 0.00012492 0.00012368   -0.10471507  282.48327856
+    ## BTC_BTCD 12 0.02181257 0.02181258 0.02181257   -0.06659434   25.88634721
+    ## BTC_BTM  13 0.00025756 0.00025927 0.00025604   -0.10992846   17.60086876
+    ## BTC_BTS  14 0.00006875 0.00006925 0.00006920   -0.10294885 3382.22984227
     ##                 quoteVolume isFrozen   high24hr    low24hr
-    ## BTC_BCN  434688688.47180653        0 0.00000070 0.00000057
-    ## BTC_BELA   2230639.75011194        0 0.00008469 0.00007557
-    ## BTC_BLK    2332774.02799669        0 0.00016600 0.00010553
-    ## BTC_BTCD      1327.84009431        0 0.02337140 0.02111147
-    ## BTC_BTM      76248.78981316        0 0.00029592 0.00024126
-    ## BTC_BTS   49528426.61819916        0 0.00007727 0.00006233
+    ## BTC_BCN  374167194.83057225        0 0.00000070 0.00000057
+    ## BTC_BELA   2248614.62645145        0 0.00008500 0.00007557
+    ## BTC_BLK    2302345.45394455        0 0.00016600 0.00010553
+    ## BTC_BTCD      1173.53818884        0 0.02337140 0.02111147
+    ## BTC_BTM      66224.10584473        0 0.00029592 0.00024126
+    ## BTC_BTS   48940224.82804560        0 0.00007727 0.00006233
 
 #### Return24hVolume
 
@@ -82,19 +89,19 @@ head(volume.info$volume.pairs)
 ```
 
     ##               pair1        pair2
-    ## BTC_BCN   277.37904 434688688.47
-    ## BTC_BELA  180.74524   2230639.75
-    ## BTC_BLK   288.08522   2332774.03
-    ## BTC_BTCD   29.51489      1327.84
-    ## BTC_BTM    20.51282     76248.79
-    ## BTC_BTS  3438.28411  49528426.62
+    ## BTC_BCN   234.57979 3.741672e+08
+    ## BTC_BELA  182.27881 2.248615e+06
+    ## BTC_BLK   282.48328 2.302345e+06
+    ## BTC_BTCD   25.88635 1.173538e+03
+    ## BTC_BTM    17.60087 6.622411e+04
+    ## BTC_BTS  3382.22984 4.894022e+07
 
 ``` r
 volume.info$volume.totals
 ```
 
     ##                   BTC            ETH              USDT            XMR
-    ## volume 83837.31200634 14808.30274235 56464510.28486143 72456.61452282
+    ## volume 82269.31244618 14301.23838744 56013853.85459654 64192.33167235
     ##              XUSD
     ## volume 0.00000000
 
@@ -111,25 +118,25 @@ order.book <- ReturnOrderBook(poloniex.public,
 head(order.book$bid)
 ```
 
-    ##          bid        amount
-    ## 1 0.00004251  425.78917834
-    ## 2 0.00004250    5.87647059
-    ## 3 0.00004245   12.79422658
-    ## 4 0.00004244 2036.17298307
-    ## 5 0.00004227            30
-    ## 6 0.00004224           500
+    ##          bid         amount
+    ## 1 0.00004203  1454.78867311
+    ## 2 0.00004197 26615.06963855
+    ## 3 0.00004196 61206.07824319
+    ## 4 0.00004185   238.94862605
+    ## 5 0.00004182    637.7422286
+    ## 6 0.00004175             30
 
 ``` r
 head(order.book$ask)
 ```
 
-    ##          ask         amount
-    ## 1 0.00004307  4678.09810846
-    ## 2 0.00004308 19366.08667495
-    ## 3 0.00004310          19.97
-    ## 4 0.00004311   267.18138451
-    ## 5 0.00004312  3930.80563282
-    ## 6 0.00004314   709.15314188
+    ##          ask        amount
+    ## 1 0.00004227 1733.14696938
+    ## 2 0.00004228 3507.17954868
+    ## 3 0.00004233 1764.87315439
+    ## 4 0.00004238   911.4799629
+    ## 5 0.00004239     24119.149
+    ## 6 0.00004240 1362.01111163
 
 ``` r
 order.book$frozen
@@ -141,7 +148,7 @@ order.book$frozen
 order.book$seq
 ```
 
-    ## [1] 37161720
+    ## [1] 37173964
 
 ``` r
 pair       <- "all"
@@ -154,32 +161,32 @@ order.book$BTC_ETH$bid
 ```
 
     ##           bid      amount
-    ## 1  0.09794047  3.35759384
-    ## 2  0.09790000 18.31825087
-    ## 3  0.09789926           3
-    ## 4  0.09787924         3.1
-    ## 5  0.09786737         2.8
-    ## 6  0.09785898        3.12
-    ## 7  0.09783369         2.7
-    ## 8  0.09782101      29.658
-    ## 9  0.09782100     14.1428
-    ## 10 0.09782048  2.38399325
+    ## 1  0.09522789           3
+    ## 2  0.09522109 26.41365677
+    ## 3  0.09521701        2.65
+    ## 4  0.09519213         2.6
+    ## 5  0.09518554  6.29590818
+    ## 6  0.09518553  5.40415652
+    ## 7  0.09517213         2.9
+    ## 8  0.09515992        2.95
+    ## 9  0.09513734        2.78
+    ## 10 0.09511728   8.2450438
 
 ``` r
 order.book$BTC_ETH$ask
 ```
 
     ##           ask     amount
-    ## 1  0.09801698  2.5576468
-    ## 2  0.09801699 3.38163078
-    ## 3  0.09801700 6.40172133
-    ## 4  0.09801945          3
-    ## 5  0.09804320       2.76
-    ## 6  0.09804998 0.00472952
-    ## 7  0.09805000 1.13076317
-    ## 8  0.09806243     28.346
-    ## 9  0.09806244        2.8
-    ## 10 0.09808107       2.77
+    ## 1  0.09532027 4.92214052
+    ## 2  0.09532028     77.312
+    ## 3  0.09535244 0.00209748
+    ## 4  0.09538176       2.81
+    ## 5  0.09539241 0.04588743
+    ## 6  0.09540178        3.1
+    ## 7  0.09541856       3.09
+    ## 8  0.09544789 0.00209538
+    ## 9  0.09546295 0.00106316
+    ## 10 0.09550000          6
 
 ``` r
 order.book$BTC_ETH$frozen
@@ -191,7 +198,7 @@ order.book$BTC_ETH$frozen
 order.book$BTC_ETH$seq
 ```
 
-    ## [1] 368925769
+    ## [1] 368953261
 
 #### ReturnTradeHistory
 
@@ -246,20 +253,20 @@ chart.data <- ReturnChartData(theObject = poloniex.public,
 tail(chart.data)
 ```
 
-    ##                           high        low       open      close    volume
-    ## 2017-07-07 20:00:00 0.09861897 0.09560000 0.09794200 0.09637649 2904.1812
-    ## 2017-07-08 00:00:00 0.09700501 0.09314993 0.09633197 0.09606020 6122.1190
-    ## 2017-07-08 04:00:00 0.09828000 0.09569548 0.09606020 0.09670868 2002.6569
-    ## 2017-07-08 08:00:00 0.09737591 0.09387972 0.09670867 0.09484001 3395.7858
-    ## 2017-07-08 12:00:00 0.09828000 0.09468260 0.09484000 0.09793757 3256.3735
-    ## 2017-07-08 16:00:00 0.09830000 0.09755742 0.09793757 0.09801700  276.2542
+    ##                           high        low       open      close   volume
+    ## 2017-07-07 20:00:00 0.09861897 0.09560000 0.09794200 0.09637649 2904.181
+    ## 2017-07-08 00:00:00 0.09700501 0.09314993 0.09633197 0.09606020 6122.119
+    ## 2017-07-08 04:00:00 0.09828000 0.09569548 0.09606020 0.09670868 2002.657
+    ## 2017-07-08 08:00:00 0.09737591 0.09387972 0.09670867 0.09484001 3395.786
+    ## 2017-07-08 12:00:00 0.09828000 0.09468260 0.09484000 0.09793757 3256.373
+    ## 2017-07-08 16:00:00 0.09830000 0.09401001 0.09793757 0.09518554 1276.516
     ##                     quotevolume weightedaverage
-    ## 2017-07-07 20:00:00   30012.900      0.09676443
-    ## 2017-07-08 00:00:00   64453.257      0.09498540
-    ## 2017-07-08 04:00:00   20653.349      0.09696523
-    ## 2017-07-08 08:00:00   35667.894      0.09520567
-    ## 2017-07-08 12:00:00   33710.114      0.09659930
-    ## 2017-07-08 16:00:00    2818.442      0.09801664
+    ## 2017-07-07 20:00:00    30012.90      0.09676443
+    ## 2017-07-08 00:00:00    64453.26      0.09498540
+    ## 2017-07-08 04:00:00    20653.35      0.09696523
+    ## 2017-07-08 08:00:00    35667.89      0.09520567
+    ## 2017-07-08 12:00:00    33710.11      0.09659930
+    ## 2017-07-08 16:00:00    13258.11      0.09628194
 
 ``` r
 # install.packages("quantmod")
@@ -274,7 +281,7 @@ chart.plot <- add_RSI()
 chart.plot
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 #### ReturnCurrencies
 
@@ -305,23 +312,21 @@ head(loan.orders$offers)
 ```
 
     ##         rate     amount min.days max.days
-    ## 1 0.00087700 0.01000000        2        2
-    ## 2 0.00089100 0.00004531        2        2
-    ## 3 0.00089500 0.01000000        2        2
-    ## 4 0.00091400 0.01000000        2        2
-    ## 5 0.00092700 0.01098169        2        2
-    ## 6 0.00093300 0.01000000        2        2
+    ## 1 0.00097974 0.01236799        2        2
+    ## 2 0.00098074 0.01826585        2        2
+    ## 3 0.00098174 0.03406500        2        2
+    ## 4 0.00098207 0.01579913        2        2
+    ## 5 0.00098240 0.01579913        2        2
+    ## 6 0.00098274 0.01579913        2        2
 
 ``` r
 head(loan.orders$demands)
 ```
 
     ##         rate     amount min.days max.days
-    ## 1 0.02000000 0.00006500        2        2
-    ## 2 0.00060000 0.06405245        2        2
-    ## 3 0.00050000 0.14400000        2        2
-    ## 4 0.00030000 0.04835525        2        2
-    ## 5 0.00020000 0.08027924        2        2
+    ## 1 0.02000000 0.00883956        2        2
+    ## 2 0.00050000 0.02016000        2        2
+    ## 3 0.00002000 0.67549565        2        2
 
 #### GET / SET public API URL and command Strings.
 
@@ -438,7 +443,7 @@ head(balances)
 
 #### ProcessTradingRequest
 
-This function allows the users to call any of the trading functions that are accessible through the Poloniex Trading API. The `ProcessTradingRequest` method takes a command string as input argument in combination with a list of additional input arguments that correspond to the particular command in question. Largely untested, but should work just fine.. (todo: test!).
+This function allows the users to call any of the trading functions that are accessible through the Poloniex Trading API. The `ProcessTradingRequest` method takes a command string as input argument in combination with a list of additional input arguments that correspond to the particular command in question.
 
 Some examples:
 
@@ -609,9 +614,7 @@ GetPoloniexPublicCommands(poloniex.public)
 Donations
 ---------
 
-If you find this software useful and/or you would like to see additional extensions or a future release to CRAN, feel free to donate some crypto:
-
-Crypto Addresses:
+If you find this software useful and/or you would like to see additional extensions, feel free to donate some crypto:
 
 -   BTC: 1QHtZLZ15Cmj4FPr5h5exDjYciBDhh7mzA
 -   LTC: LhKf6MQ7LY1k8YMaAq9z3APz8kVyFX3L2M
