@@ -5,7 +5,8 @@ PoloniexR
 
 This package provides a user-friendly R interface to the Poloniex (Cryptocurrency Trading) REST API.
 
-### Installation
+Installation
+--------------------------------------
 
 The package has been submitted to CRAN and will most likely be released in the near future (after approval). After the release date, the package can be installed in the usual manner:
 
