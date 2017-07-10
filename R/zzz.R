@@ -1,7 +1,7 @@
 .onAttach <- function(libname = find.package("PoloniexR"),
                       pkgname = "PoloniexR") {
   packageStartupMessage(
-    "Poloniex API wrapper - Provided by EssentialQuant.com"
+    "Poloniex API wrapper - Provided by Essential Data Science Consulting ltd."
   )
   packageStartupMessage(
     "  Author      - Jellen Vermeir (jellenvermeir@essentialquant.com)"
