@@ -1,5 +1,5 @@
 #' An S4 class representing the Poloniex Trading API.
-#' 
+#'
 #' All calls to the trading API are sent via HTTP POST.
 #' The POST data itself is signed with your key's secret
 #' according to the HMAC-SHA512 method.
@@ -22,7 +22,7 @@ PoloniexTradingAPI <- setClass(
             secret           = "character",
             commands         = "list"),
   # Set the default values for the slots.
-  prototype = list(trading.base.url = "https://poloniex.com/tradingApi?",
+  prototype = list(trading.base.url = "https://poloniex.com/tradingApi",
                    key              = NULL,
                    secret           = NULL,
                    commands         = trading.commands.default),
@@ -41,7 +41,7 @@ PoloniexTradingAPI <- setClass(
       return (sprintf(type.err, substitute(object@secret)))
     }
 
-    rest.grep <- "https?://.*\\?$"
+    rest.grep <- "https?://.*"
     if (!grepl(rest.grep, object@trading.base.url)){
       return (paste("NOK - trading.base.url input argument",
                     "must be of the following form:", rest.grep))
@@ -103,7 +103,7 @@ setMethod(f="GetPoloniexTradingURL",
 #' \dontrun{
 #' poloniex.trading <- PoloniexTradingAPI(your.key, your.secret,
 #'                                        trading.base.url = "https://not_working/trading?")
-#' poloniex.trading <- SetPoloniexTradingURL(poloniex.trading, 
+#' poloniex.trading <- SetPoloniexTradingURL(poloniex.trading,
 #'                                          trading.base.url = "https://poloniex.com/tradingApi?")
 #' GetPoloniexTradingURL(poloniex.trading)
 #' }
@@ -122,7 +122,7 @@ setGeneric(name="SetPoloniexTradingURL",
 #' \dontrun{
 #' poloniex.trading <- PoloniexTradingAPI(your.key, your.secret,
 #'                                        trading.base.url = "https://not_working/trading?")
-#' poloniex.trading <- SetPoloniexTradingURL(poloniex.trading, 
+#' poloniex.trading <- SetPoloniexTradingURL(poloniex.trading,
 #'                                           trading.base.url = "https://poloniex.com/tradingApi?")
 #' GetPoloniexTradingURL(poloniex.trading)
 #' }
@@ -367,10 +367,10 @@ setMethod(f="ReturnBalances",
 
             returnbalances.command = theObject@commands$returnBalances
             balances <- ProcessTradingRequest(theObject, command = returnbalances.command)
-          
+
             balances <- vapply(balances, as.numeric, numeric(1))
             balances <- balances[balances != 0]
-          
+
             if (length(balances) > 0){
               return (balances)
             }
@@ -434,7 +434,7 @@ setMethod(f="ReturnCompleteBalances",
           definition=function(theObject, all.balances = FALSE){
 
             stopifnot(is(all.balances, "logical"))
-  
+
             returnCompleteBalances.command = theObject@commands$returnCompleteBalances
             if (all.balances){
               balances <- ProcessTradingRequest(theObject,
@@ -445,16 +445,16 @@ setMethod(f="ReturnCompleteBalances",
               balances <- ProcessTradingRequest(theObject,
                                                 command = returnCompleteBalances.command)
             }
-          
+
             balances.available <- vapply(balances, function(x) as.numeric(x$available), numeric(1))
             balances.orders    <- vapply(balances, function(x) as.numeric(x$onOrders), numeric(1))
             balances.total     <- balances.available + balances.orders
             balances.btc.value <- vapply(balances, function(x) as.numeric(x$btcValue), numeric(1))
-          
+
             mask <- (balances.total != 0)
-          
+
             if (sum(mask) > 0){
-          
+
               df <- data.frame(available = balances.available[mask],
                                on.orders = balances.orders[mask],
                                total     = balances.total[mask],

@@ -26,3 +26,14 @@ used the "::" notation. To fix, I suppressed the note by using namespace imports
 After suppression (submission):
 
 *	0 errors 0 warnings 0 notes
+
+## SECOND SUBMISSION
+
+* Removed redundant "R" from Title.
+* Added Poloniex REST documentation as URL in DESCRIPTION file.
+* Changed MIT LICENSE file to meet CRAN requirements.
+
+## THIRD SUBMISSION
+
+* MIT LICENSE FIX
+* Minor DESCRIPTION updates

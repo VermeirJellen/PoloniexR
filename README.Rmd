@@ -259,7 +259,7 @@ new.address <- ProcessTradingRequest(poloniex.trading,
 # returnDepositsWithdrawals ##
 ##############################
 account.activity <- ProcessTradingRequest(poloniex.trading,
-                                          command = poloniex.trading@commands$returnDepositWithdrawals,
+                                          command = poloniex.trading@commands$returnDepositsWithdrawals,
                                           args = list(start = as.numeric(as.POSIXct("2017-01-01 00:00:00 UTC"))),
                                                       end   = as.numeric(as.POSIXct("2018-01-01 00:00:00 UTC")))
 

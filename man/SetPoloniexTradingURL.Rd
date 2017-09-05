@@ -21,7 +21,7 @@ Setter for REST service URL for the Poloniex Trading API
 \dontrun{
 poloniex.trading <- PoloniexTradingAPI(your.key, your.secret,
                                        trading.base.url = "https://not_working/trading?")
-poloniex.trading <- SetPoloniexTradingURL(poloniex.trading, 
+poloniex.trading <- SetPoloniexTradingURL(poloniex.trading,
                                          trading.base.url = "https://poloniex.com/tradingApi?")
 GetPoloniexTradingURL(poloniex.trading)
 }

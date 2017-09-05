@@ -5,16 +5,17 @@ PoloniexR
 
 This package provides a user-friendly R interface to the Poloniex (Cryptocurrency Trading) REST API.
 
-Installation
---------------------------------------
+### Installation
 
-The package has been submitted to CRAN and will most likely be released in the near future (after approval). After the release date, the package can be installed in the usual manner:
+The package has been submitted to CRAN and can be installed in the usual manner:
 
 ``` r
 install.packages("PoloniexR")
 ```
 
-Before the release date, the package can be installed from github by using the `devtools` utility:
+Note - version 0.0.1 contains a small bug related to the ```returnDepositWithdrawals``` trading command. The associated value of this field should be ```returnDepositsWithdrawals``` (instead of the default ```returnDepositWithdrawals``` value). Starting from version 0.0.2 both the command name field and corresponding value have been changed to ```returnDepositsWithdrawals``` in order to correctly represent the Poloniex command string and value. At the time of writing, the latest version has not yet been uploaded to CRAN (view issues). If you are using version 0.0.1 you can manually modify the command field to the correct value, as explained in the tutorial below.
+
+Alternatively, you can download the latest version from Github by using the `devtools` utility:
 
 ``` r
 # install.packages("devtools") # if devtools currently not installed
@@ -65,19 +66,19 @@ head(ticker.info)
 ```
 
     ##          id       last  lowestAsk highestBid percentChange    baseVolume
-    ## BTC_BCN   7 0.00000061 0.00000062 0.00000061   -0.11594202  237.75162490
-    ## BTC_BELA  8 0.00008300 0.00008303 0.00008302   -0.00156381  190.14654746
-    ## BTC_BLK  10 0.00012268 0.00012281 0.00012268   -0.09098992  268.85301544
-    ## BTC_BTCD 12 0.02330672 0.02377138 0.02351052    0.01293928   40.86744262
-    ## BTC_BTM  13 0.00025509 0.00025741 0.00025510   -0.12682275   15.17865271
-    ## BTC_BTS  14 0.00007084 0.00007084 0.00007083   -0.07350248 3365.46596597
+    ## BTC_BCN   7 0.00000045 0.00000045 0.00000044    0.04651162  140.34075817
+    ## BTC_BELA  8 0.00003500 0.00003493 0.00003489   -0.00085640   14.99802048
+    ## BTC_BLK  10 0.00005187 0.00005206 0.00005187    0.01052016   37.94874739
+    ## BTC_BTCD 12 0.02531388 0.02536933 0.02531388    0.03609528  100.84732395
+    ## BTC_BTM  13 0.00015154 0.00015865 0.00015235    0.03510928   14.71463897
+    ## BTC_BTS  14 0.00002839 0.00002839 0.00002819    0.04876246 1622.58729620
     ##                 quoteVolume isFrozen   high24hr    low24hr
-    ## BTC_BCN  380502961.74155170        0 0.00000070 0.00000057
-    ## BTC_BELA   2347915.33596919        0 0.00008511 0.00007557
-    ## BTC_BLK    2202012.89035315        0 0.00016600 0.00010553
-    ## BTC_BTCD      1825.01294801        0 0.02377139 0.02111147
-    ## BTC_BTM      58244.42310928        0 0.00029213 0.00024126
-    ## BTC_BTS   48841637.36506472        0 0.00007727 0.00006233
+    ## BTC_BCN  325325457.89093947        0 0.00000046 0.00000040
+    ## BTC_BELA    434565.68383812        0 0.00003594 0.00003295
+    ## BTC_BLK     737890.01313361        0 0.00005745 0.00004703
+    ## BTC_BTCD      4313.59357954        0 0.02553146 0.02082233
+    ## BTC_BTM      96666.03400292        0 0.00016196 0.00014301
+    ## BTC_BTS   59739194.52850370        0 0.00002967 0.00002413
 
 #### Return24hVolume
 
@@ -90,19 +91,19 @@ head(volume.info$volume.pairs)
 ```
 
     ##               pair1        pair2
-    ## BTC_BCN   237.75162 3.805030e+08
-    ## BTC_BELA  190.14655 2.347915e+06
-    ## BTC_BLK   268.85302 2.202013e+06
-    ## BTC_BTCD   40.86744 1.825013e+03
-    ## BTC_BTM    15.17865 5.824442e+04
-    ## BTC_BTS  3365.09927 4.883805e+07
+    ## BTC_BCN   140.34076 3.253255e+08
+    ## BTC_BELA   14.99802 4.345657e+05
+    ## BTC_BLK    37.94875 7.378900e+05
+    ## BTC_BTCD  100.84732 4.313594e+03
+    ## BTC_BTM    14.71464 9.666603e+04
+    ## BTC_BTS  1622.58730 5.973919e+07
 
 ``` r
 volume.info$volume.totals
 ```
 
-    ##                   BTC            ETH              USDT            XMR
-    ## volume 82091.30031820 14390.57602507 56112825.95730906 65881.59253857
+    ##                   BTC            ETH               USDT           XMR
+    ## volume 54914.00783741 13426.28979341 161543405.47171052 1476.97493209
     ##              XUSD
     ## volume 0.00000000
 
@@ -119,25 +120,25 @@ order.book <- ReturnOrderBook(poloniex.public,
 head(order.book$bid)
 ```
 
-    ##          bid        amount
-    ## 1 0.00004201 4970.23255763
-    ## 2 0.00004200 2380.95238095
-    ## 3 0.00004187  14330.069262
-    ## 4 0.00004185  1093.5584753
-    ## 5 0.00004184 2583.61422176
-    ## 6 0.00004180 7179.50598057
+    ##          bid         amount
+    ## 1 0.00002081            755
+    ## 2 0.00002080   8391.5691609
+    ## 3 0.00002079 23929.69296271
+    ## 4 0.00002071  8384.47593762
+    ## 5 0.00002070 13025.43023026
+    ## 6 0.00002069    48.33972383
 
 ``` r
 head(order.book$ask)
 ```
 
-    ##          ask         amount
-    ## 1 0.00004203         27.972
-    ## 2 0.00004209  1897.28662399
-    ## 3 0.00004212   475.93342702
-    ## 4 0.00004219     238.036225
-    ## 5 0.00004229 12525.93311398
-    ## 6 0.00004235             30
+    ##          ask        amount
+    ## 1 0.00002083           105
+    ## 2 0.00002086   48.17048637
+    ## 3 0.00002088   48.12226767
+    ## 4 0.00002089 2365.37057941
+    ## 5 0.00002090           200
+    ## 6 0.00002091    48.0741454
 
 ``` r
 order.book$frozen
@@ -149,7 +150,7 @@ order.book$frozen
 order.book$seq
 ```
 
-    ## [1] 37184775
+    ## [1] 45701656
 
 ``` r
 pair       <- "all"
@@ -161,33 +162,33 @@ order.book <- ReturnOrderBook(poloniex.public,
 order.book$BTC_ETH$bid
 ```
 
-    ##           bid     amount
-    ## 1  0.09560000 0.52003864
-    ## 2  0.09556590 0.00206619
-    ## 3  0.09556340 0.00372187
-    ## 4  0.09554732        2.9
-    ## 5  0.09552588       3.01
-    ## 6  0.09551724 0.00637036
-    ## 7  0.09550480       2.92
-    ## 8  0.09547912          3
-    ## 9  0.09546629        3.1
-    ## 10 0.09544302     20.018
+    ##           bid      amount
+    ## 1  0.07060716    0.099737
+    ## 2  0.07060705  6.48402184
+    ## 3  0.07060352        8.87
+    ## 4  0.07058794 12.01611542
+    ## 5  0.07058781  4.76768449
+    ## 6  0.07057696           8
+    ## 7  0.07055265        2.59
+    ## 8  0.07054405           2
+    ## 9  0.07052954        6.91
+    ## 10 0.07050518  0.00713392
 
 ``` r
 order.book$BTC_ETH$ask
 ```
 
-    ##           ask     amount
-    ## 1  0.09562712  6.0021786
-    ## 2  0.09566919          3
-    ## 3  0.09568858        0.2
-    ## 4  0.09570759       2.84
-    ## 5  0.09573016        2.8
-    ## 6  0.09574036       3.08
-    ## 7  0.09574037 3.13199029
-    ## 8  0.09575283      3.015
-    ## 9  0.09577057       2.87
-    ## 10 0.09579392        3.1
+    ##           ask      amount
+    ## 1  0.07070000  0.31644926
+    ## 2  0.07073720  0.00370166
+    ## 3  0.07075266           8
+    ## 4  0.07075539  0.01099231
+    ## 5  0.07076538           7
+    ## 6  0.07076539 39.99975913
+    ## 7  0.07077384  0.17206337
+    ## 8  0.07077550         7.6
+    ## 9  0.07078920  0.03384221
+    ## 10 0.07080000        0.03
 
 ``` r
 order.book$BTC_ETH$frozen
@@ -199,7 +200,7 @@ order.book$BTC_ETH$frozen
 order.book$BTC_ETH$seq
 ```
 
-    ## [1] 368985775
+    ## [1] 400870315
 
 #### ReturnTradeHistory
 
@@ -254,20 +255,20 @@ chart.data <- ReturnChartData(theObject = poloniex.public,
 tail(chart.data)
 ```
 
-    ##                           high        low       open      close   volume
-    ## 2017-07-07 20:00:00 0.09861897 0.09560000 0.09794200 0.09637649 2904.181
-    ## 2017-07-08 00:00:00 0.09700501 0.09314993 0.09633197 0.09606020 6122.119
-    ## 2017-07-08 04:00:00 0.09828000 0.09569548 0.09606020 0.09670868 2002.657
-    ## 2017-07-08 08:00:00 0.09737591 0.09387972 0.09670867 0.09484001 3395.786
-    ## 2017-07-08 12:00:00 0.09828000 0.09468260 0.09484000 0.09793757 3256.373
-    ## 2017-07-08 16:00:00 0.09830000 0.09401001 0.09793757 0.09574037 2095.198
+    ##                           high        low       open      close     volume
+    ## 2017-09-04 20:00:00 0.07296796 0.07003290 0.07111984 0.07038424 2713.50931
+    ## 2017-09-05 00:00:00 0.07100000 0.06819028 0.07050940 0.06871113 3944.10524
+    ## 2017-09-05 04:00:00 0.07136983 0.06711210 0.06877522 0.07098000 3066.17088
+    ## 2017-09-05 08:00:00 0.07134999 0.06945009 0.07093359 0.07032699 2022.45269
+    ## 2017-09-05 12:00:00 0.07180097 0.07003209 0.07034546 0.07065581 2221.75735
+    ## 2017-09-05 16:00:00 0.07076540 0.07035476 0.07072645 0.07064626   84.04729
     ##                     quotevolume weightedaverage
-    ## 2017-07-07 20:00:00    30012.90      0.09676443
-    ## 2017-07-08 00:00:00    64453.26      0.09498540
-    ## 2017-07-08 04:00:00    20653.35      0.09696523
-    ## 2017-07-08 08:00:00    35667.89      0.09520567
-    ## 2017-07-08 12:00:00    33710.11      0.09659930
-    ## 2017-07-08 16:00:00    21823.88      0.09600481
+    ## 2017-09-04 20:00:00   37967.109      0.07147000
+    ## 2017-09-05 00:00:00   56908.735      0.06930579
+    ## 2017-09-05 04:00:00   43959.378      0.06975009
+    ## 2017-09-05 08:00:00   28689.985      0.07049333
+    ## 2017-09-05 12:00:00   31247.551      0.07110180
+    ## 2017-09-05 16:00:00    1190.345      0.07060753
 
 ``` r
 # install.packages("quantmod")
@@ -313,24 +314,20 @@ head(loan.orders$offers)
 ```
 
     ##         rate     amount min.days max.days
-    ## 1 0.00079900 6.33131018        2        2
-    ## 2 0.00079925 0.01064195        2        2
-    ## 3 0.00079997 0.05277320        2        2
-    ## 4 0.00079998 0.41191457        2        2
-    ## 5 0.00080000 2.12478816        2        2
-    ## 6 0.00080049 0.01000000        2        2
+    ## 1 0.00015000 0.52249675        2        2
+    ## 2 0.00015500 1.44362802        2        2
+    ## 3 0.00015520 0.01795757        2        2
+    ## 4 0.00015525 0.01807411        2        2
+    ## 5 0.00015625 0.37500000        2        2
+    ## 6 0.00015637 0.05502303        2        2
 
 ``` r
 head(loan.orders$demands)
 ```
 
     ##         rate     amount min.days max.days
-    ## 1 0.05000000 0.00759280        2        2
-    ## 2 0.00060010 0.10957506        2        2
-    ## 3 0.00060000 0.11550554        2        2
-    ## 4 0.00030000 0.05584450        2        2
-    ## 5 0.00010010 0.30211701        2        2
-    ## 6 0.00010000 0.20208797        2        2
+    ## 1 0.00000300 0.02109824        2        2
+    ## 2 0.00000100 2.10582878        2        2
 
 #### GET / SET public API URL and command Strings.
 
@@ -471,7 +468,7 @@ new.address <- ProcessTradingRequest(poloniex.trading,
 # returnDepositsWithdrawals ##
 ##############################
 account.activity <- ProcessTradingRequest(poloniex.trading,
-                                          command = poloniex.trading@commands$returnDepositWithdrawals,
+                                          command = poloniex.trading@commands$returnDepositsWithdrawals,
                                           args = list(start = as.numeric(as.POSIXct("2017-01-01 00:00:00 UTC"))),
                                                       end   = as.numeric(as.POSIXct("2018-01-01 00:00:00 UTC")))
 
